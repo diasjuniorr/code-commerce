@@ -4,9 +4,10 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/diasjuniorr/codebank/infrastructure/repository"
-	"github.com/diasjuniorr/codebank/usecase"
-	_ "github.com/lib/pg"
+	"github.com/diasjuniorr/code-commerce/codebank/infrastructure/kafka"
+	"github.com/diasjuniorr/code-commerce/codebank/infrastructure/repository"
+	"github.com/diasjuniorr/code-commerce/codebank/usecase"
+	_ "github.com/lib/pq"
 )
 
 func main() {
@@ -16,7 +17,8 @@ func main() {
 
 func setupTransactionUseCase(db *sql.DB) usecase.UseCaseTransaction {
 	transactionRepository := repository.NewTransactionRepositoryDb(db)
-	useCase := usecase.NewUseCaseTransaction(transactionRepository)
+	kafkaProducer := kafka.NewKafkaProducer()
+	useCase := usecase.NewUseCaseTransaction(transactionRepository, kafkaProducer)
 	return useCase
 }
 func setupDb() *sql.DB {

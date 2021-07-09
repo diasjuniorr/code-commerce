@@ -5,7 +5,7 @@ option go_package = "grpc/pb";
 import "google/protobuf/empty.proto";
 
 service PaymentService {
-    rpc Payment(PaymentRequest) returns (google.protobuf.empty.proto) {}
+    rpc Payment(PaymentRequest) returns (google.protobuf.Empty) {}
 }
 
 message PaymentRequest {

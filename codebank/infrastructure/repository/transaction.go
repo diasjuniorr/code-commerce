@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"errors"
 
-	"github.com/diasjuniorr/codebank/domain"
+	"github.com/diasjuniorr/code-commerce/codebank/domain"
 )
 
 type TransactionRepositoryDb struct {

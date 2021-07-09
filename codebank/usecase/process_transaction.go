@@ -5,9 +5,9 @@ import (
 	"log"
 	"time"
 
-	"github.com/diasjuniorr/codebank/domain"
-	"github.com/diasjuniorr/codebank/dto"
-	"github.com/diasjuniorr/codebank/infrastructure/kafka"
+	"github.com/diasjuniorr/code-commerce/codebank/domain"
+	"github.com/diasjuniorr/code-commerce/codebank/dto"
+	"github.com/diasjuniorr/code-commerce/codebank/infrastructure/kafka"
 )
 
 type UseCaseTransaction struct {
