@@ -15,8 +15,8 @@ type UseCaseTransaction struct {
 	KafkaProducer         *kafka.KafkaProducer
 }
 
-func NewUseCaseTransaction(transactionRepository domain.TransactionRepository, kafkaProducer *kafka.KafkaProducer) UseCaseTransaction {
-	return UseCaseTransaction{transactionRepository: transactionRepository, KafkaProducer: kafkaProducer}
+func NewUseCaseTransaction(transactionRepository domain.TransactionRepository) UseCaseTransaction {
+	return UseCaseTransaction{transactionRepository: transactionRepository}
 }
 
 func (u *UseCaseTransaction) ProcessTransaction(transactionDto dto.Transaction) (domain.Transaction, error) {

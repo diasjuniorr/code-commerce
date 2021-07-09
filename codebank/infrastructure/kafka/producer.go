@@ -6,8 +6,8 @@ type KafkaProducer struct {
 	Producer *ckafka.Producer
 }
 
-func NewKafkaProducer() *KafkaProducer {
-	return &KafkaProducer{}
+func NewKafkaProducer() KafkaProducer {
+	return KafkaProducer{}
 }
 
 func (k *KafkaProducer) SetProducer(bootstrapServer string) {
