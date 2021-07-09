@@ -6,7 +6,6 @@ import (
 
 	"github.com/diasjuniorr/code-commerce/codebank/infrastructure/kafka"
 	"github.com/diasjuniorr/code-commerce/codebank/infrastructure/repository"
-	"github.com/diasjuniorr/code-commerce/codebank/infrastructure/server"
 	"github.com/diasjuniorr/code-commerce/codebank/usecase"
 	_ "github.com/lib/pq"
 )
@@ -14,16 +13,12 @@ import (
 func main() {
 	db := setupDb()
 	defer db.Close()
-
-	producer := setupKafkaProducer()
-	processTransactionUseCase := setupTransactionUseCase(db, producer)
-	serveGrpc(processTransactionUseCase)
 }
 
-func setupTransactionUseCase(db *sql.DB, producer kafka.KafkaProducer) usecase.UseCaseTransaction {
+func setupTransactionUseCase(db *sql.DB) usecase.UseCaseTransaction {
 	transactionRepository := repository.NewTransactionRepositoryDb(db)
-	useCase := usecase.NewUseCaseTransaction(transactionRepository)
-	useCase.KafkaProducer = &producer
+	kafkaProducer := kafka.NewKafkaProducer()
+	useCase := usecase.NewUseCaseTransaction(transactionRepository, kafkaProducer)
 	return useCase
 }
 func setupDb() *sql.DB {
@@ -41,16 +36,4 @@ func setupDb() *sql.DB {
 	}
 
 	return db
-}
-
-func setupKafkaProducer() kafka.KafkaProducer {
-	kafkaProducer := kafka.NewKafkaProducer()
-	kafkaProducer.SetProducer("host.docker.internal:9094")
-	return kafkaProducer
-}
-
-func serveGrpc(processTransactionUseCase usecase.UseCaseTransaction) {
-	grpcServer := server.NewGRPCServer()
-	grpcServer.ProcessTransactionUseCase = processTransactionUseCase
-	grpcServer.Serve()
 }
