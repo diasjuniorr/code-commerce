@@ -33,7 +33,6 @@ func (u *UseCaseTransaction) ProcessTransaction(transactionDto dto.Transaction) 
 
 	t := u.newTransaction(transactionDto, *creditCard)
 	t.ProcessAndValidate(creditCard)
-
 	err = u.transactionRepository.SaveTransaction(*t, *creditCard)
 	if err != nil {
 		return domain.Transaction{}, err
@@ -67,7 +66,6 @@ func (u *UseCaseTransaction) hydrateCreditCard(transactionDto dto.Transaction) *
 
 func (u *UseCaseTransaction) newTransaction(transactionDto dto.Transaction, cc domain.CreditCard) *domain.Transaction {
 	t := domain.NewTransaction()
-	t.ID = transactionDto.ID
 	t.Amount = transactionDto.Amount
 	t.Description = transactionDto.Description
 	t.Store = transactionDto.Store

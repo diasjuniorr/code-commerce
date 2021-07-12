@@ -22,7 +22,7 @@ func (t *TransactionRepositoryDb) GetCreditCard(creditCard domain.CreditCard) (d
 		return c, err
 	}
 
-	if err = stmt.QueryRow(creditCard.Number).Scan(&c.ID, &c.Balance, &c.Balance); err != nil {
+	if err = stmt.QueryRow(creditCard.Number).Scan(&c.ID, &c.Balance, &c.Limit); err != nil {
 		return c, errors.New("credit card does not exist")
 	}
 
@@ -31,7 +31,7 @@ func (t *TransactionRepositoryDb) GetCreditCard(creditCard domain.CreditCard) (d
 
 func (t *TransactionRepositoryDb) SaveTransaction(transaction domain.Transaction, creditCard domain.CreditCard) error {
 	stmt, err := t.db.Prepare(`insert into transactions(id,credit_card_id,amount, status, description, store, created_at)
-	values($1, $2, $3, $4, $5, $6,$7`)
+	values($1, $2, $3, $4, $5, $6,$7)`)
 	if err != nil {
 		return err
 	}

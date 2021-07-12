@@ -31,7 +31,6 @@ func NewTransaction() *Transaction {
 
 func (t *Transaction) ProcessAndValidate(creditCard *CreditCard) {
 	t.Status = "rejected"
-
 	if t.Amount+creditCard.Balance <= creditCard.Limit {
 		t.Status = "approved"
 		creditCard.Balance = creditCard.Balance + t.Amount
