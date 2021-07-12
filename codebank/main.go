@@ -3,13 +3,23 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"log"
+	"os"
 
 	"github.com/diasjuniorr/code-commerce/codebank/infrastructure/kafka"
 	"github.com/diasjuniorr/code-commerce/codebank/infrastructure/repository"
 	"github.com/diasjuniorr/code-commerce/codebank/infrastructure/server"
 	"github.com/diasjuniorr/code-commerce/codebank/usecase"
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
+
+func init() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("error loading .env file")
+	}
+}
 
 func main() {
 	db := setupDb()
@@ -31,11 +41,11 @@ func setupTransactionUseCase(db *sql.DB, producer kafka.KafkaProducer) usecase.U
 
 func setupDb() *sql.DB {
 	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-		"db",
-		"5432",
-		"postgres",
-		"root",
-		"codebank",
+		os.Getenv("host"),
+		os.Getenv("port"),
+		os.Getenv("user"),
+		os.Getenv("password"),
+		os.Getenv("dbname"),
 	)
 
 	db, err := sql.Open("postgres", psqlInfo)
@@ -48,7 +58,7 @@ func setupDb() *sql.DB {
 
 func setupKafkaProducer() kafka.KafkaProducer {
 	kafkaProducer := kafka.NewKafkaProducer()
-	kafkaProducer.SetProducer("host.docker.internal:9094")
+	kafkaProducer.SetProducer(os.Getenv("KafkaBootstrapServers"))
 	return kafkaProducer
 }
 
