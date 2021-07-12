@@ -22,7 +22,7 @@ func NewGRPCServer() GRPCServer {
 func (g *GRPCServer) Serve() {
 	lis, err := net.Listen("tcp", "0.0.0.0:50052")
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("could not listen on port", err)
 	}
 	transactionService := service.NewTransactionService()
 	transactionService.ProcessTransactionUseCase = g.ProcessTransactionUseCase

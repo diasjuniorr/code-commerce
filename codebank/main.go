@@ -17,6 +17,7 @@ func main() {
 
 	producer := setupKafkaProducer()
 	processTransactionUSeCase := setupTransactionUseCase(db, producer)
+	fmt.Printf("codebank server running and listen on port 50052")
 	serveGrpc(processTransactionUSeCase)
 
 }
@@ -28,7 +29,7 @@ func setupTransactionUseCase(db *sql.DB, producer kafka.KafkaProducer) usecase.U
 	return useCase
 }
 func setupDb() *sql.DB {
-	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disabled",
+	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		"db",
 		"5432",
 		"postgres",
