@@ -1,4 +1,6 @@
+import { GetServerSideProps, NextPage } from "next";
 import Link from "next/link";
+import Head from "next/head";
 import {
   Card,
   CardActions,
@@ -8,10 +10,14 @@ import {
   Button,
   Grid,
 } from "@material-ui/core";
-import Head from "next/head";
-import { products } from "../models";
+import http from "../http";
+import { Product } from "../models";
 
-export default function Home() {
+interface ProductsListPageProps {
+  products: Product[];
+}
+
+const ProductsListPage: NextPage<ProductsListPageProps> = ({ products }) => {
   return (
     <div>
       <Head>
@@ -51,4 +57,13 @@ export default function Home() {
       </Grid>
     </div>
   );
-}
+};
+
+export default ProductsListPage;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const response = await http.get("products");
+  return {
+    props: { products: response.data },
+  };
+};
