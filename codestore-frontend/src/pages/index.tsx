@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Card,
   CardActions,
@@ -8,7 +9,6 @@ import {
   Grid,
 } from "@material-ui/core";
 import Head from "next/head";
-import styles from "../../styles/Home.module.css";
 import { products } from "../models";
 
 export default function Home() {
@@ -35,9 +35,15 @@ export default function Home() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button component="a" size="small" color="primary">
-                  Detalhes
-                </Button>
+                <Link
+                  href="/products/[slug]"
+                  as={`/products/${product.slug}`}
+                  passHref
+                >
+                  <Button component="a" size="small" color="primary">
+                    Detalhes
+                  </Button>
+                </Link>
               </CardActions>
             </Card>
           </Grid>
