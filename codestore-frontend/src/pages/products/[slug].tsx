@@ -18,40 +18,38 @@ import http from "../../http";
 import { Product } from "../../models";
 
 interface ProductDetailPageProps {
-  products: Product[];
+  product: Product;
 }
 
-const ProductDetailPage: NextPage<ProductDetailPageProps> = ({ products }) => {
+const ProductDetailPage: NextPage<ProductDetailPageProps> = ({ product }) => {
   return (
     <div>
       <Head>
-        <title>{products[0].slug} - Detalhes do produto</title>
+        <title>{product.slug} - Detalhes do produto</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {products.map((product) => (
-        <Card>
-          <CardHeader
-            title={product.name.toUpperCase()}
-            subheader={`R$ ${product.price}`}
-          />
-          <CardActions>
-            <Button size="small" color="primary" component="a">
-              Comprar
-            </Button>
-          </CardActions>
-          <CardMedia style={{ paddingTop: "56%" }} image={product.image_url} />
-          <CardContent>
-            <Typography
-              component="p"
-              variant="body2"
-              color="textSecondary"
-              gutterBottom
-            >
-              {product.description}
-            </Typography>
-          </CardContent>
-        </Card>
-      ))}
+      <Card>
+        <CardHeader
+          title={product.name.toUpperCase()}
+          subheader={`R$ ${product.price}`}
+        />
+        <CardActions>
+          <Button size="small" color="primary" component="a">
+            Comprar
+          </Button>
+        </CardActions>
+        <CardMedia style={{ paddingTop: "56%" }} image={product.image_url} />
+        <CardContent>
+          <Typography
+            component="p"
+            variant="body2"
+            color="textSecondary"
+            gutterBottom
+          >
+            {product.description}
+          </Typography>
+        </CardContent>
+      </Card>
     </div>
   );
 };
@@ -62,7 +60,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params;
   const response = await http.get(`products/${slug}`);
   return {
-    props: { products: response.data },
+    props: { product: response.data },
   };
 };
 

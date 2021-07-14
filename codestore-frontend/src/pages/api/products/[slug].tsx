@@ -3,10 +3,14 @@ import { Product, products } from "../../../models";
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Product[]>
+  res: NextApiResponse<Product | { message: string }>
 ) {
   const { slug } = req.query;
-  const productsBySlug = products.filter((p) => p.slug === slug);
-  console.log("debug: ", productsBySlug);
-  res.status(200).json(productsBySlug);
+  const product = products.find((p) => p.slug === slug);
+
+  if (!product) {
+    return res.status(404).json({ message: "Product not found" });
+  }
+
+  res.status(200).json(product);
 }
