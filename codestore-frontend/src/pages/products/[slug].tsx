@@ -58,8 +58,7 @@ const ProductDetailPage: NextPage<ProductDetailPageProps> = ({ products }) => {
 
 export default ProductDetailPage;
 
-// export const getStaticProps: GetStaticProps = async (context) => {
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params;
   const response = await http.get(`products/${slug}`);
   return {
@@ -67,12 +66,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-// export const getStaticPaths: GetStaticPaths = async (context) => {
-//   const { data: products } = await http.get("products");
+export const getStaticPaths: GetStaticPaths = async (context) => {
+  const { data: products } = await http.get("products");
 
-//   const paths = products.map((p: Product) => ({
-//     params: { slug: p.slug },
-//   }));
+  const paths = products.map((p: Product) => ({
+    params: { slug: p.slug },
+  }));
 
-//   return { paths, fallback: "blocking" };
-// };
+  return { paths, fallback: "blocking" };
+};
