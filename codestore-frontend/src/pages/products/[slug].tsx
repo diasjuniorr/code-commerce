@@ -1,9 +1,4 @@
-import {
-  NextPage,
-  GetStaticProps,
-  GetStaticPaths,
-  GetServerSideProps,
-} from "next";
+import { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
 import {
   Card,
@@ -21,11 +16,11 @@ interface ProductDetailPageProps {
   product: Product;
 }
 
-const ProductDetailPage: NextPage<ProductDetailPageProps> = ({ product }) => {
+const ProductDetailsPage: NextPage<ProductDetailPageProps> = ({ product }) => {
   return (
     <div>
       <Head>
-        <title>{product.slug} - Detalhes do produto</title>
+        <title>{product.slug} - Product Details</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Card>
@@ -35,7 +30,7 @@ const ProductDetailPage: NextPage<ProductDetailPageProps> = ({ product }) => {
         />
         <CardActions>
           <Button size="small" color="primary" component="a">
-            Comprar
+            Buy
           </Button>
         </CardActions>
         <CardMedia style={{ paddingTop: "56%" }} image={product.image_url} />
@@ -54,7 +49,7 @@ const ProductDetailPage: NextPage<ProductDetailPageProps> = ({ product }) => {
   );
 };
 
-export default ProductDetailPage;
+export default ProductDetailsPage;
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params;

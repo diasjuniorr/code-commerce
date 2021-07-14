@@ -25,7 +25,7 @@ const ProductsListPage: NextPage<ProductsListPageProps> = ({ products }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Typography component="h1" variant="h3" color="textPrimary" gutterBottom>
-        Produtos
+        Products
       </Typography>
       <Grid container spacing={4}>
         {products.map((product, key) => (
@@ -47,7 +47,7 @@ const ProductsListPage: NextPage<ProductsListPageProps> = ({ products }) => {
                   passHref
                 >
                   <Button component="a" size="small" color="primary">
-                    Detalhes
+                    Details
                   </Button>
                 </Link>
               </CardActions>
