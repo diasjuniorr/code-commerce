@@ -11,21 +11,21 @@ export interface Product {
 export const products: Product[] = [
   {
     id: "uuid",
-    name: "produto fake",
-    description: "description do produto fake",
+    name: "Awesome product",
+    description: "This is an awesome product",
     price: 50.5,
     image_url:
       "https://source.unsplash.com/random?product" + Math.round(Math.random()),
-    slug: "produto-fake",
+    slug: "awesome-products",
     created_at: "2021-06-06T00:00:00",
   },
   {
     id: "uuid",
-    name: "produto fake",
-    description: "description do produto fake",
+    name: "Code product",
+    description: "This is a code product",
     price: 50.5,
     image_url: "https://source.unsplash.com/random?product" + Math.random(),
-    slug: "produto-fake",
+    slug: "code-products",
     created_at: "2021-06-06T00:00:00",
   },
 ];
