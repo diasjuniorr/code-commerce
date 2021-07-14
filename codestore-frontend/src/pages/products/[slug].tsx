@@ -1,5 +1,6 @@
 import { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
+import axios from "axios";
 import {
   Card,
   CardActions,
@@ -53,10 +54,19 @@ export default ProductDetailsPage;
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params;
-  const response = await http.get(`products/${slug}`);
-  return {
-    props: { product: response.data },
-  };
+  try {
+    const { data: product } = await http.get(`products/${slug}`);
+    return {
+      props: { product },
+      revalidate: 1 * 60 * 2,
+    };
+  } catch (e) {
+    if (axios.isAxiosError(e) && e.response?.status === 404) {
+      return { notFound: true };
+    }
+
+    throw e;
+  }
 };
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
