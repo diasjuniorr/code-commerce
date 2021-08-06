@@ -15,7 +15,7 @@ export const products: Product[] = [
     description: "This is an awesome product",
     price: 50.5,
     image_url:
-      "https://source.unsplash.com/random?product" + Math.round(Math.random()),
+      "https://source.unsplash.com/random?product-" + Math.round(Math.random()),
     slug: "awesome-products",
     created_at: "2021-06-06T00:00:00",
   },
@@ -24,7 +24,7 @@ export const products: Product[] = [
     name: "Code product",
     description: "This is a code product",
     price: 50.5,
-    image_url: "https://source.unsplash.com/random?product" + Math.random(),
+    image_url: "https://source.unsplash.com/random?product-" + Math.random(),
     slug: "code-products",
     created_at: "2021-06-06T00:00:00",
   },
