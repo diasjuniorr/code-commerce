@@ -44,17 +44,19 @@ const CheckoutPage: NextPage<OrderPageProps> = ({ product }) => {
             <TextField label="Name" fullWidth />
           </Grid>
           <Grid item xs={12} md={6}>
-            <TextField label="Card Number" fullWidth />
+            <TextField type="number" label="Card Number" fullWidth />
           </Grid>
           <Grid item xs={12} md={6}>
-            <TextField label="CVV" fullWidth />
+            <TextField type="number" label="CVV" fullWidth />
           </Grid>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
-              <TextField label="Expiration Month" fullWidth />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField label="Expiration Year" fullWidth />
+          <Grid item xs={12} md={6}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={6}>
+                <TextField type="number" label="Expiration Month" fullWidth />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField type="number" label="Expiration Year" fullWidth />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
