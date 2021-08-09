@@ -41,21 +41,36 @@ const CheckoutPage: NextPage<OrderPageProps> = ({ product }) => {
       <form>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
-            <TextField label="Name" fullWidth />
+            <TextField label="Name" fullWidth required />
           </Grid>
           <Grid item xs={12} md={6}>
-            <TextField type="number" label="Card Number" fullWidth />
+            <TextField
+              label="Card Number"
+              fullWidth
+              inputProps={{ maxLength: 16 }}
+              required
+            />
           </Grid>
           <Grid item xs={12} md={6}>
-            <TextField type="number" label="CVV" fullWidth />
+            <TextField type="number" label="CVV" fullWidth required />
           </Grid>
           <Grid item xs={12} md={6}>
             <Grid container spacing={3}>
               <Grid item xs={12} md={6}>
-                <TextField type="number" label="Expiration Month" fullWidth />
+                <TextField
+                  type="number"
+                  label="Expiration Month"
+                  fullWidth
+                  required
+                />
               </Grid>
               <Grid item xs={12} md={6}>
-                <TextField type="number" label="Expiration Year" fullWidth />
+                <TextField
+                  type="number"
+                  label="Expiration Year"
+                  fullWidth
+                  required
+                />
               </Grid>
             </Grid>
           </Grid>
