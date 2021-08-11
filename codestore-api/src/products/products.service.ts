@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { EntityNotFoundError, Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
@@ -20,11 +20,17 @@ export class ProductsService {
     return this.productRepo.find();
   }
 
-  findOne(idOrSlug: string) {
+  async findOne(idOrSlug: string) {
     const where = validateUUID(idOrSlug)
       ? { id: idOrSlug }
       : { slug: idOrSlug };
-    return this.productRepo.findOne(where);
+
+    const product = await this.productRepo.findOne(where);
+    if (!product) {
+      throw new EntityNotFoundError(Product, idOrSlug);
+    }
+
+    return product;
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
