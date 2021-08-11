@@ -38,7 +38,12 @@ export class ProductsService {
     return this.productRepo.findOne(id);
   }
 
-  remove(id: string) {
-    return this.productRepo.delete(id);
+  async remove(id: string) {
+    const product = await this.productRepo.delete(id);
+    if (!product.affected) {
+      throw new EntityNotFoundError(Product, id);
+    }
+
+    return product;
   }
 }
