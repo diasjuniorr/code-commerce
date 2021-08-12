@@ -50,6 +50,7 @@ export class Order {
     }
   }
 
+  @BeforeInsert()
   calculateTotal() {
     return (this.total = this.items.reduce((sum, item) => {
       return sum + item.quantity * item.price;
