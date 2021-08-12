@@ -1,5 +1,5 @@
 #!/bin/bash
-if [! -f ".env"]; then
+if [ ! -f ".env" ]; then
     cp .env.example .env
 fi
 
