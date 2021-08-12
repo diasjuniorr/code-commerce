@@ -36,6 +36,10 @@ export class CreateOrdersTable1628693458188 implements MigrationInterface {
             type: 'varchar',
           },
           {
+            name: 'credit_card_expiration_cvv',
+            type: 'varchar',
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'CURRENT_TIMESTAMP',
