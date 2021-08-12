@@ -7,6 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { OrderItem } from '../../orders/entities/order-item.entity';
+import { CreditCard } from '../../orders/entities/credit-card.embbeded';
 import { v4 as uuid } from 'uuid';
 
 export enum OrderStatus {
@@ -22,17 +23,8 @@ export class Order {
   @Column()
   total: number;
 
-  @Column()
-  creditCardNumber: string;
-
-  @Column()
-  creditCardName: string;
-
-  @Column()
-  creditCardExpirationYear: string;
-
-  @Column()
-  creditCardExpirationMonth: string;
+  @Column(() => CreditCard, { prefix: '' })
+  creditCard: CreditCard;
 
   @OneToMany(() => OrderItem, (item) => item.order)
   items: OrderItem[];
