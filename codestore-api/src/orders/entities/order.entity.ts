@@ -24,7 +24,7 @@ export class Order {
   total: number;
 
   @Column(() => CreditCard, { prefix: '' })
-  creditCard: CreditCard;
+  credit_card: CreditCard;
 
   @OneToMany(() => OrderItem, (item) => item.order)
   items: OrderItem[];
