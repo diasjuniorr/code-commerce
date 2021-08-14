@@ -10,7 +10,7 @@ export class OrdersService {
   constructor(@InjectRepository(Order) private orderRepo: Repository<Order>) {}
   create(createOrderDto: CreateOrderDto) {
     const order = this.orderRepo.create(createOrderDto);
-    return 'This action adds a new order';
+    return this.orderRepo.save(order);
   }
 
   findAll() {
