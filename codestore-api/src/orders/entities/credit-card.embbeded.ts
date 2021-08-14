@@ -2,17 +2,17 @@ import { Column } from 'typeorm';
 
 export class CreditCard {
   @Column({ name: 'credit_card_number' })
-  creditCardNumber: string;
+  credit_card_number: string;
 
   @Column({ name: 'credit_card_name' })
-  creditCardName: string;
+  name: string;
 
   @Column({ name: 'credit_card_expiration_year' })
-  creditCardExpirationYear: string;
+  credit_card_expiration_year: number;
 
   @Column({ name: 'credit_card_expiration_month' })
-  creditCardExpirationMonth: string;
+  credit_card_expiration_month: number;
 
   @Column({ name: 'credit_card_expiration_cvv' })
-  creditCardCVV: string;
+  cvv: string;
 }

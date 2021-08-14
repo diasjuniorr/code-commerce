@@ -54,7 +54,7 @@ class OrderItemDto {
   @IsUUID('4')
   @IsString()
   @IsNotEmpty()
-  product_id: number;
+  product_id: string;
 }
 
 export class CreateOrderDto {
