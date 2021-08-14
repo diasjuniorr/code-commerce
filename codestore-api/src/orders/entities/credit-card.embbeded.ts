@@ -12,4 +12,7 @@ export class CreditCard {
 
   @Column({ name: 'credit_card_expiration_month' })
   creditCardExpirationMonth: string;
+
+  @Column({ name: 'credit_card_expiration_cvv' })
+  creditCardCVV: string;
 }
