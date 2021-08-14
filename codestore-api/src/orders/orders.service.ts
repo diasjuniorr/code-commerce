@@ -35,7 +35,12 @@ export class OrdersService {
     return order;
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} order`;
+  async remove(id: string) {
+    const order = await this.orderRepo.delete(id);
+    if (!order.affected) {
+      throw new EntityNotFoundError(Order, id);
+    }
+
+    return order;
   }
 }
