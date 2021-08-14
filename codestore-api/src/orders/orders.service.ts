@@ -17,15 +17,20 @@ export class OrdersService {
     return this.orderRepo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} order`;
+  async findOne(id: string) {
+    const order = await this.orderRepo.findOne(id);
+    if (!order) {
+      throw new EntityNotFoundError(Order, id);
+    }
+
+    return order;
   }
 
-  update(id: number, updateOrderDto: UpdateOrderDto) {
+  update(id: string, updateOrderDto: UpdateOrderDto) {
     return `This action updates a #${id} order`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} order`;
   }
 }
