@@ -8,6 +8,14 @@ export interface Product {
   created_at: string;
 }
 
+export interface CreditCard {
+  number: string;
+  name: string;
+  expiration_year: number;
+  expiration_month: number;
+  cvv: string;
+}
+
 export const products: Product[] = [
   {
     id: "uuid",
