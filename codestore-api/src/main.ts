@@ -5,7 +5,7 @@ import { EntityNotFoundExceptionFilter } from './exception-filters/entity-not-fo
 import { ClassSerializerInterceptor } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
   app.useGlobalFilters(new EntityNotFoundExceptionFilter());
   app.useGlobalPipes(new ValidationPipe({ errorHttpStatusCode: 422 }));
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
