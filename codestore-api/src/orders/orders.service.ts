@@ -20,6 +20,7 @@ export class OrdersService {
         id: In(order.items.map((item) => item.product_id)),
       },
     });
+
     order.items.forEach((item) => {
       const product = products.find(
         (product) => product.id === item.product_id,
